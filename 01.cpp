@@ -8,21 +8,28 @@ int main()
     cin>>n;
 
     while(n--){
-        int a,b,c; cin>>a>>b>>c;
-        string a1[a], b1[b], c1[c];
+        int a; cin>>a;
+        bool isNasty = false;
 
-        getline(cin, a1[0]);
-        for(int i=0; i<a; i++) getline(cin,a1[i]);
-        for(int i=0; i<b; ++i) getline(cin,b1[i]);
-        for(int i=0; i<c; ++i) getline(cin,c1[i]);
+        vector <int> sum;
+        vector <int> diff;
 
-        for(int i=0; i<a; ++i){
-            for(int j=0; j<b; ++j){
-                for(int k=0; k<c; ++k){
-                    cout<<a1[i]<<" "<<b1[j]<<" "<<c1[k]<<".\n";
+        for (int i=0; i<(a/2); ++i){
+            if (i!=0 and a%i==0){
+                sum.push_back(i+(a/i));
+                diff.push_back((a/i)-i);
+            }
+        }
+        for(int i=0; i<sum.size(); ++i){
+            for(int j=0; j<diff.size(); ++j){
+                if(sum[i]==diff[j]){
+                    isNasty=true;
                 }
             }
         }
+
+        if(isNasty) cout<<a<<" is nasty\n";
+        else cout<<a<<" is not nasty\n";
     }
     return 0;
 }
