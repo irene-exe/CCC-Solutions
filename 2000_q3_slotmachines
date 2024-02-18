@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    
+    int quar, m1, m2, m3; cin>>quar>>m1>>m2>>m3;
+
+    int curr=0,rounds=0;
+
+    while(quar>0){
+        if(curr==0){
+            m1++;
+            if(m1==35){
+                m1=0;
+                quar+=30;
+            }
+        } else if (curr==1){
+            m2++;
+            if(m2==100){
+                m2=0;
+                quar+=60;
+            }
+        } else if (curr==2){
+            m3++;
+            if(m3==10){
+                m3=0;
+                quar+=9;
+            }
+        }
+        rounds++;
+        quar--;
+        curr=(++curr)%3;
+    }
+
+    cout<<"Martha plays "<<rounds<<" times before going broke.";
+
+    return 0;
+}
