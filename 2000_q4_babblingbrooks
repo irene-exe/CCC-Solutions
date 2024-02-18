@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    
+    long long n; cin>>n;
+    vector <double> streams;
+
+    while(n--){
+        double m; cin>>m; 
+        streams.push_back(m);
+    }
+
+    double ipt=-1;
+    while(ipt!=77){
+        cin>>ipt;
+        if(ipt==99){
+            double num; cin>>num;
+            double perc; cin>>perc;
+            streams.insert(streams.begin()+num, streams[num-1]*(100-perc)/100);
+            streams[num-1]=streams[num-1]*(perc)/100;
+        } else if (ipt==88){
+            double num; cin>>num;
+            streams[num] += streams[num-1];
+            streams.erase(streams.begin()+num-1);
+        }
+    }
+
+    for(double i=0; i<streams.size(); ++i){
+        cout<<round(streams[i])<<" ";
+    }
+
+    return 0;
+}
