@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    int day; cin>>day;
+    int days; cin>>days;
+
+    cout<<" Sun Mon Tue Wed Thr Fri Sat\n";
+    int curr=1;
+    for(int i=0; i<days; ++i){
+        if (i==0){
+            for(int j=0; j<day-1; j++) cout<<"    ";
+        }
+        if(i>=9){
+            cout<<"  "<<curr++;
+        } else {
+            cout<<"   "<<curr++;
+        }
+        if((day+curr-2)%7==0) cout<<"\n";
+    }
+
+    return 0;
+}
