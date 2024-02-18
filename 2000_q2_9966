@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    
+    int l,u; cin>>l>>u;
+    int rotatable = 0;
+
+    for(int i=l; i<=u; ++i){
+        string curr = to_string(i);
+        bool is_r = true;
+
+        for(int j=0; j<curr.size(); ++j){
+            if(curr[j]=='X') continue;
+            else if(curr[j]=='1' or curr[j]=='8' or curr[j]=='0'){
+                if(curr[curr.size()-1-j]==curr[j]){
+                    curr[j]='X';
+                    curr[curr.size()-1-j]='X';
+                } else is_r=false;
+            } else if (curr[j]=='6'){
+                if(curr[curr.size()-1-j]=='9' and !(curr.size()%2==1 and j==curr.size()/2+1)){
+                    curr[j]='X';
+                    curr[curr.size()-1-j]='X';
+                } else is_r=false;
+            } else if (curr[j]=='9'){
+                if(curr[curr.size()-1-j]=='6' and !(curr.size()%2==1 and j==curr.size()/2+1)){
+                    curr[j]='X';
+                    curr[curr.size()-1-j]='X';
+                } else is_r=false;
+            } else {
+                is_r=false;
+            }
+        }
+
+        if(is_r){
+            rotatable++;
+        }
+    }
+
+    cout<<rotatable;
+    return 0;
+}
