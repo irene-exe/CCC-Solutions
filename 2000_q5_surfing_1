@@ -1,0 +1,78 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    
+    long long n; cin>>n;
+    string line;
+    unordered_map <string, vector<string>> links;
+
+    getline(cin, line);
+    line = "</HTML> ";
+    string curr="";
+    while(n>=0){
+        if(line == "</HTML> "){
+            n--;
+            if(n==-1) break;
+            getline(cin, line);
+            links[line];
+            curr=line;
+            getline(cin, line);
+        }
+        
+        size_t loc = line.find("<A HREF=\"");
+        while(loc != string::npos){
+            size_t loc_end = line.find("\">");
+
+            string n = line.substr(loc+9,(loc_end-loc-9));
+            links[curr].push_back(n+" ");
+            line.erase(line.begin()+loc,line.begin()+loc_end+2);
+
+            loc = line.find("<A HREF=");
+        }
+        getline(cin,line);
+    }
+
+    for(auto& val: links){
+        for(int i=0; i<val.second.size(); ++i){
+            cout<<"Link from "<<val.first<<"to "<<val.second[i]<<"\n";
+        }
+    }
+
+    line = "";
+    curr = "";
+    while (line!="The End"){
+        getline(cin, line);
+        if(line=="The End") break;
+        
+        getline(cin, curr);
+
+        queue <string> q;
+        q.push(line);
+        bool surf = false;
+
+        while(q.size()>0){
+            string now = q.front();
+            q.pop();
+
+            for(int i=0; i<links[now].size(); ++i){
+                cout<<"here: "<<links[now][i]<<endl;
+                if(links[now][i]==curr){
+                    surf = true;
+                    break;
+                } else {
+                    q.push(links[now][i]);
+                }
+            }
+        }
+
+        if(surf){
+            cout<<"Can surf from "<<line<<"to "<<curr<<".";
+        } else {
+            cout<<"Can't surf from "<<line<<"to "<<curr;
+        }
+    }
+
+    return 0;
+}
